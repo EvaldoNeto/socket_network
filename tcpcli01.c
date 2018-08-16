@@ -2,7 +2,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <errno.h>
-#include <strings.h>
+#include <string.h>
 #include <stdio.h>
 
 #include <sys/types.h>
@@ -10,16 +10,23 @@
 
 #include <arpa/inet.h>
 
+#include "./libft/libft.h"
+
 void str_cli(FILE *fp, int sockfd)
 {
   char sendline[4096];
-  char recvline[4096];
+  char **recvline;
 
+  recvline = (char **)ft_memalloc(sizeof(char *));
   while (fgets(sendline, 4096, fp) != NULL)
     {
       write(sockfd, sendline, strlen(sendline));
-      fputs(recvline, stdout);
+      get_next_line(sockfd, recvline);
+      fputs(*recvline, stdout);
+      free(*recvline);
+      ft_putchar('\n');;
     }
+  free(recvline);
 }
 
 int main(int argc, char **argv)

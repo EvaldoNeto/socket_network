@@ -2,7 +2,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <errno.h>
-#include <strings.h>
+#include <string.h>
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -39,7 +39,7 @@ int main()
 
   listen(listenfd, 1024);
 
-  while(true)
+  while(1)
     {
       clilen = sizeof(cliaddr);
       connfd = accept(listenfd, (struct sockaddr *) &cliaddr, &clilen);
